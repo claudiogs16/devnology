@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+// TestController
+Route::get('/test', [TestController::class, 'show']);
+
+// UserController
+Route::get('/users', [UserController::class, 'showAllUser']);
+Route::get('/users/{id}', [UserController::class, 'showUser']);
