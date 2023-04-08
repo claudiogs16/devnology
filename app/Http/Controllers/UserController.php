@@ -8,13 +8,33 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function showAllUser(){
-        $users = User::all();
-        return $users->toJson();
+
+
+        try {
+            $users = User::all();
+
+            if($users)
+            return $users->toJson();
+
+            return 'Nenhum usuario registrado no sistema!!';
+        } catch (\Throwable $th) {
+           return $tr;
+        }
+
+
     }
 
     public function showUser($id){
-        $user = User::find($id);
-        return json_encode($user);
+        try {
+            $user = User::find($id);
+
+            if($user)
+            return json_encode($user);
+
+            return "Usuario não existe!!";
+        } catch (\Throwable $th) {
+            return $tr;
+        }
     }
 
 

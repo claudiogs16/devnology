@@ -16,11 +16,20 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->create([
             'name' => 'Claudio Gomes',
-            'email' => 'claudiogs16@gmail.com',
-            'contact' => '9505710',
-            'address' => 'Terra Branca',
+            'email' => 'gomes16@gmail.com',
+            'contact' => '+0012565253',
+            'address' => 'Palmarejo',
             'Place' => 'Praia',
             'Caixa Postal' => '7206',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Joana Rosa',
+            'email' => 'rosa@hotmail.com',
+            'contact' => '+002389565874',
+            'address' => 'Fazenda',
+            'Place' => 'Praia',
+            'Caixa Postal' => '7201',
         ]);
 
 

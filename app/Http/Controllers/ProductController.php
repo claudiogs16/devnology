@@ -11,7 +11,8 @@ class ProductController extends Controller
     public function showAllProduct(){
 
 
-        $product = array();
+        try {
+            $product = array();
 
         $promise = Http::async()->get('http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/brazilian_provider');
         $fornecedorBrazilian = json_decode($promise->wait());
@@ -47,6 +48,9 @@ class ProductController extends Controller
 
 
         return json_encode($product);
+        } catch (\Throwable $th) {
+            return $tr;
+        }
 
     }
 
@@ -56,7 +60,7 @@ class ProductController extends Controller
         switch ($supplierID) {
             case 1:
                 $promise = Http::async()->get('http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/brazilian_provider/'.$id);
-            $fornecedorBrazilian = json_decode($promise->wait());
+            return $fornecedorBrazilian = json_decode($promise->wait());
 
             if($fornecedorBrazilian){
                 $p = new Product(intval($fornecedorBrazilian->id), $fornecedorBrazilian->nome, $fornecedorBrazilian->descricao, floatval($fornecedorBrazilian->preco));
@@ -67,7 +71,7 @@ class ProductController extends Controller
                 $p->setImages($fornecedorBrazilian->imagem);
                 return json_encode($p);
             }else{
-                return null;
+                return [];
             }
 
             case 2:
@@ -88,12 +92,12 @@ class ProductController extends Controller
 
                 return json_encode($p);
                 }else{
-                    return null;
+                    return [];
                 }
 
 
             default:
-                return null;
+                return "Fornecedor não foi encontrado!!";
         }
 
 
