@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -13,11 +14,11 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->integer('product_id');
-            $table->string('supplier_id');
+            $table->integer('supplier_id');
             $table->integer('quantity');
             // $table->integer('user_id')->unsigned();
-            // $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

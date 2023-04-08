@@ -8,7 +8,7 @@ use App\Product;
 
 class ProductController extends Controller
 {
-    public function showAllProduct(){
+    public function index(){
 
 
         try {
@@ -55,7 +55,7 @@ class ProductController extends Controller
     }
 
 
-    public function showProduct($supplierID,$id){
+    public function find($supplierID,$id){
 
         switch ($supplierID) {
             case 1:

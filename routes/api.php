@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,15 @@ Route::get('/test', [TestController::class, 'show']);
 Route::get('/supplier', [TestController::class, 'loadAPISupplier']);
 
 // UserController
-Route::get('/users', [UserController::class, 'showAllUser']);
-Route::get('/users/{id}', [UserController::class, 'showUser']);
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/{id}', [UserController::class, 'find']);
 
 // ProductController
-Route::get('/products', [ProductController::class, 'showAllProduct']);
-Route::get('/products/{supplierID}/{id}', [ProductController::class, 'showProduct']);
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{supplierID}/{id}', [ProductController::class, 'find']);
+
+// CartController
+Route::get('/carts/{user_id}', [CartController::class, 'index']);
+Route::post('/carts/store', [CartController::class, 'store']);
+Route::delete('/carts/{id}', [CartController::class, 'delete']);
+Route::delete('/carts/clear/{user_id}', [CartController::class, 'clear']);

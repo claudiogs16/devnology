@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function showAllUser(){
+    public function index(){
 
 
         try {
@@ -24,7 +24,7 @@ class UserController extends Controller
 
     }
 
-    public function showUser($id){
+    public function find($id){
         try {
             $user = User::find($id);
 
