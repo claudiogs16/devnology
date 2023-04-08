@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // TestController
 Route::get('/test', [TestController::class, 'show']);
+Route::get('/supplier', [TestController::class, 'loadAPISupplier']);
 
 // UserController
 Route::get('/users', [UserController::class, 'showAllUser']);
 Route::get('/users/{id}', [UserController::class, 'showUser']);
+
+// ProductController
+Route::get('/products', [ProductController::class, 'showAllProduct']);
