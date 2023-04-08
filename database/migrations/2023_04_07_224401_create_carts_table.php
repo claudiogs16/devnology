@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->string('supplier');
             $table->integer('product_id');
-            $table->float('price');
+            $table->string('supplier_id');
             $table->integer('quantity');
-            $table->float('total');
             // $table->integer('user_id')->unsigned();
             // $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

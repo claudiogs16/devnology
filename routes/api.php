@@ -21,7 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 // TestController
 Route::get('/test', [TestController::class, 'show']);
 Route::get('/supplier', [TestController::class, 'loadAPISupplier']);
@@ -32,3 +31,4 @@ Route::get('/users/{id}', [UserController::class, 'showUser']);
 
 // ProductController
 Route::get('/products', [ProductController::class, 'showAllProduct']);
+Route::get('/products/{supplierID}/{id}', [ProductController::class, 'showProduct']);

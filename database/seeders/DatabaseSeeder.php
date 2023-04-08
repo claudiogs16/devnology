@@ -17,6 +17,14 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Claudio Gomes',
             'email' => 'claudiogs16@gmail.com',
+            'contact' => '9505710',
+            'address' => 'Terra Branca',
+            'Place' => 'Praia',
+            'Caixa Postal' => '7206',
         ]);
+
+
+
+
     }
 }
