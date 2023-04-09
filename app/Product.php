@@ -55,7 +55,7 @@ class Product{
     }
 
     public function setImages($image){
-        $this->images[] = $image;
+        $this->images[] = stripslashes($image);
     }
 
     // public function rmImages($image){

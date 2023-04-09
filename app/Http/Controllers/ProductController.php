@@ -23,7 +23,8 @@ class ProductController extends Controller
             $p->setCategory($fornecedorBrazilian[$i]->categoria);
             $p->setDepartment($fornecedorBrazilian[$i]->departamento);
             $p->setMaterial($fornecedorBrazilian[$i]->material);
-            $p->setImages($fornecedorBrazilian[$i]->imagem);
+            $p->setImages(stripslashes($fornecedorBrazilian[$i]->imagem));
+
             $product[] = $p;
         }
 
@@ -38,7 +39,7 @@ class ProductController extends Controller
             $p->setDiscountValue($fornecedorEuropean[$i]->discountValue);
 
             for ($index=0; $index < count($fornecedorEuropean[$i]->gallery); $index++) {
-                $p->setImages($fornecedorEuropean[$i]->gallery[$index]);
+                $p->setImages(stripslashes($fornecedorEuropean[$i]->gallery[$index]));
             }
 
             $p->setDetails($fornecedorEuropean[$i]->details);
@@ -62,7 +63,7 @@ class ProductController extends Controller
         switch ($supplierID) {
             case 1:
                 $promise = Http::async()->get('http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/brazilian_provider/'.$id);
-            return $fornecedorBrazilian = json_decode($promise->wait());
+            $fornecedorBrazilian = json_decode($promise->wait());
 
             if($fornecedorBrazilian){
                 $p = new Product(intval($fornecedorBrazilian->id), $fornecedorBrazilian->nome, $fornecedorBrazilian->descricao, floatval($fornecedorBrazilian->preco));

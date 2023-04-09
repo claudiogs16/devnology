@@ -2,10 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,5 +40,9 @@ Route::get('/carts/{user_id}', [CartController::class, 'index']);
 Route::post('/carts/store', [CartController::class, 'store']);
 Route::delete('/carts/{id}', [CartController::class, 'destroy']);
 Route::delete('/carts/clear/{user_id}', [CartController::class, 'clear']);
+
+// OrderController
+Route::get('/orders/{user_id}', [OrderController::class, 'index']);
+Route::post('/orders/{user_id}', [OrderController::class, 'store']);
 
 

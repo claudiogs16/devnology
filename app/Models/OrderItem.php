@@ -9,14 +9,11 @@ class OrderItem extends Model
 {
     use HasFactory;
 
-
     public function order(){
         return $this->belongsTo(Order::Class);
     }
 
-    public function orderItemImages(){
-        return $this->hasMany(OrderItemImage::class);
-    }
+
 
 
 }
