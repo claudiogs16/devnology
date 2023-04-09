@@ -87,6 +87,42 @@ class CartController extends Controller
         }
     }
 
+    public function decrement($id){
+        $validator = Validator::make(['id' => $id], [
+            'id' => 'required|integer|exists:carts,id',
+        ], [
+            'exists' => 'O :attribute é invalido.',
+            'integer' => 'O campo :attribute deve ser um número inteiro.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+
+
+        try {
+            $cart = Cart::find($id);
+
+            if($cart->quantity == 1){
+                $cart->delete();
+                return $cart->refresh();
+            }
+
+            $cart->quantity =  $cart->quantity - 1;
+            $cart->save();
+
+            return $cart->refresh();
+
+        } catch (\Throwable $th) {
+            return $th;
+        }
+
+
+
+
+    }
+
 
     public function destroy($id)
     {
