@@ -47,7 +47,9 @@ class ProductController extends Controller
         }
 
 
-        return json_encode($product);
+        // return json_encode($product);
+        return response()->json($product);
+
         } catch (\Throwable $th) {
             return $tr;
         }
@@ -55,7 +57,7 @@ class ProductController extends Controller
     }
 
 
-    public function find($supplierID,$id){
+    public function show($supplierID,$id){
 
         switch ($supplierID) {
             case 1:
@@ -69,7 +71,7 @@ class ProductController extends Controller
                 $p->setDepartment($fornecedorBrazilian->departamento);
                 $p->setMaterial($fornecedorBrazilian->material);
                 $p->setImages($fornecedorBrazilian->imagem);
-                return json_encode($p);
+                return response()->json($p);
             }else{
                 return [];
             }
@@ -90,7 +92,9 @@ class ProductController extends Controller
 
                 $p->setDetails($fornecedorEuropean->details);
 
-                return json_encode($p);
+                // return json_encode($p);
+                return response()->json($p);
+
                 }else{
                     return [];
                 }

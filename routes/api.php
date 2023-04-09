@@ -28,14 +28,16 @@ Route::get('/supplier', [TestController::class, 'loadAPISupplier']);
 
 // UserController
 Route::get('/users', [UserController::class, 'index']);
-Route::get('/users/{id}', [UserController::class, 'find']);
+Route::get('/users/{id}', [UserController::class, 'show']);
 
 // ProductController
 Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/{supplierID}/{id}', [ProductController::class, 'find']);
+Route::get('/products/{supplierID}/{id}', [ProductController::class, 'show']);
 
 // CartController
 Route::get('/carts/{user_id}', [CartController::class, 'index']);
 Route::post('/carts/store', [CartController::class, 'store']);
-Route::delete('/carts/{id}', [CartController::class, 'delete']);
+Route::delete('/carts/{id}', [CartController::class, 'destroy']);
 Route::delete('/carts/clear/{user_id}', [CartController::class, 'clear']);
+
+

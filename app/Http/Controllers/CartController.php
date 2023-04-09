@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Cart;
 
 
 class CartController extends Controller
@@ -25,8 +26,13 @@ class CartController extends Controller
         }
 
         try {
-            $cart = Cart::where('user_id', $user_id)->get();
-            return json_encode($cart);
+
+            // $user = User::with('carts')->find($user_id);
+
+            $carts = User::find($user_id)->carts()->get();
+
+            return response()->json($carts);
+
         } catch (\Throwable $th) {
             return $th;
         }
@@ -92,7 +98,7 @@ class CartController extends Controller
     }
 
 
-    public function delete($id){
+    public function destroy($id){
         $validator = Validator::make(['id' => $id], [
             'id' => 'required|integer|exists:carts,id',
         ],[
@@ -139,13 +145,17 @@ class CartController extends Controller
 
 
         try {
-            $carts = Cart::where('user_id', $user_id)->delete();
+            // $carts = Cart::where('user_id', $user_id)->delete();
 
-            if($carts){
-                return json_encode($carts);
-            }else{
-                return 'Os itens não foram encontrados';
-            }
+            // if($carts){
+            //     return json_encode($carts);
+            // }else{
+            //     return 'Os itens não foram encontrados';
+            // }
+
+            $user = User::where('id', $user_id)->first();
+
+            return $user;
 
 
         } catch (\Throwable $th) {

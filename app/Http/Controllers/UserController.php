@@ -24,7 +24,7 @@ class UserController extends Controller
 
     }
 
-    public function find($id){
+    public function show($id){
         try {
             $user = User::find($id);
 
@@ -33,7 +33,7 @@ class UserController extends Controller
 
             return "Usuario não existe!!";
         } catch (\Throwable $th) {
-            return $tr;
+            return $th;
         }
     }
 
