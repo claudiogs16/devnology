@@ -48,7 +48,7 @@ class CartController extends Controller
             'user_id' => 'required|integer|exists:users,id',
             'product_id' => 'required|integer',
             'supplier_id' => 'required|integer',
-            'quantity' => 'required|integer',
+
 
         ], [
             'integer' => 'O campo :attribute deve ser um número inteiro.',
@@ -67,7 +67,7 @@ class CartController extends Controller
             $cart = Cart::where('product_id', $req->input('product_id'))->where('supplier_id', $req->input('supplier_id'))->where('user_id', $req->input('user_id'))->first();
 
             if ($cart) {
-                $cart->quantity = intval($cart->quantity)  + intval($req->input('quantity'));
+                $cart->quantity = intval($cart->quantity)  + 1;
                 $cart->save();
                 return $cart->refresh();
             }
@@ -77,7 +77,7 @@ class CartController extends Controller
             $cart->user_id = $req->input('user_id');
             $cart->product_id = $req->input('product_id');
             $cart->supplier_id = $req->input('supplier_id');
-            $cart->quantity = $req->input('quantity');
+            $cart->quantity = 1;
 
             $cart->save();
 
