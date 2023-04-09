@@ -9,11 +9,8 @@ class OrderItem extends Model
 {
     use HasFactory;
 
-    public function order(){
-        return $this->belongsTo(Order::Class);
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
-
-
-
-
 }

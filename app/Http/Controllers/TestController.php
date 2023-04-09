@@ -8,13 +8,15 @@ use App\Product;
 
 class TestController extends Controller
 {
-    public function show(){
+    public function show()
+    {
         return 'Teste com sucesso!!';
     }
 
 
 
-    public function loadAPISupplier(){
+    public function loadAPISupplier()
+    {
 
 
         $product = array();
@@ -28,7 +30,7 @@ class TestController extends Controller
 
 
 
-        for ($i=0; $i < 3; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $s = new Product(intval($fornecedorBrazilian[$i]->id), $fornecedorBrazilian[$i]->nome, $fornecedorBrazilian[$i]->descricao, floatval($fornecedorBrazilian[$i]->preco));
             $s->setSupplierID(1);
             $s->setCategory($fornecedorBrazilian[$i]->categoria);
@@ -44,7 +46,5 @@ class TestController extends Controller
 
 
         return json_encode($fornecedorEuropean);
-
     }
-
 }

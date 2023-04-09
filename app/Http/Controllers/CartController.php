@@ -13,10 +13,11 @@ class CartController extends Controller
 
 
 
-    public function index($user_id){
+    public function index($user_id)
+    {
         $validator = Validator::make(['user_id' => $user_id], [
             'user_id' => 'required|integer|exists:users,id',
-        ],[
+        ], [
             'exists' => 'O :attribute é invalido.',
             'integer' => 'O campo :attribute deve ser um número inteiro.',
         ]);
@@ -32,19 +33,14 @@ class CartController extends Controller
             $carts = User::find($user_id)->carts()->get();
 
             return response()->json($carts);
-
         } catch (\Throwable $th) {
             return $th;
         }
-
-
-
-
-
     }
 
 
-    public function store(Request $req){
+    public function store(Request $req)
+    {
 
 
 
@@ -70,11 +66,11 @@ class CartController extends Controller
         try {
             $cart = Cart::where('product_id', $req->input('product_id'))->where('supplier_id', $req->input('supplier_id'))->where('user_id', $req->input('user_id'))->first();
 
-        if($cart){
-            $cart->quantity = intval($cart->quantity)  + intval($req->input('quantity'));
-            $cart->save();
-            return $cart->refresh();
-        }
+            if ($cart) {
+                $cart->quantity = intval($cart->quantity)  + intval($req->input('quantity'));
+                $cart->save();
+                return $cart->refresh();
+            }
 
 
             $cart = new Cart();
@@ -86,22 +82,17 @@ class CartController extends Controller
             $cart->save();
 
             return $cart->refresh();
-
-
         } catch (\Throwable $th) {
             return $th;
         }
-
-
-
-
     }
 
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $validator = Validator::make(['id' => $id], [
             'id' => 'required|integer|exists:carts,id',
-        ],[
+        ], [
             'exists' => 'O :attribute é invalido.',
             'integer' => 'O campo :attribute deve ser um número inteiro.',
         ]);
@@ -115,26 +106,23 @@ class CartController extends Controller
         try {
             $cart = Cart::find($id);
 
-            if($cart){
+            if ($cart) {
                 $cart->delete();
                 return $cart->refresh();
-            }else{
+            } else {
                 return 'O item não foi encontrado';
             }
-
-
         } catch (\Throwable $th) {
             return $th;
         }
-
-
     }
 
 
-    public function clear($user_id){
+    public function clear($user_id)
+    {
         $validator = Validator::make(['user_id' => $user_id], [
             'user_id' => 'required|integer|exists:users,id',
-        ],[
+        ], [
             'exists' => 'O :attribute é invalido.',
             'integer' => 'O campo :attribute deve ser um número inteiro.',
         ]);
@@ -156,15 +144,10 @@ class CartController extends Controller
             $user = User::where('id', $user_id)->first();
 
             return $user;
-
-
         } catch (\Throwable $th) {
             return $th;
         }
-
     }
-
-
 }
 
 
@@ -174,4 +157,3 @@ class CartController extends Controller
 //     'supplier_id',
 //     'quantity',
 // ];
-

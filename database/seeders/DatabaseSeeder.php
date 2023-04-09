@@ -31,9 +31,5 @@ class DatabaseSeeder extends Seeder
             'Place' => 'Praia',
             'Caixa Postal' => '7201',
         ]);
-
-
-
-
     }
 }
