@@ -1,4 +1,4 @@
-Devnology
+Devnology BackEnd
 
 Projecto de Loja Online para teste.
 
