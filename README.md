@@ -16,8 +16,6 @@ Projecto de Loja Online para teste.
 4. Execute `php artisan key:generate` para gerar a chave da aplicação
 5. Execute `php artisan migrate` para criar as tabelas no banco de dados
 6. Execute `php artisan db:seed` para criar as tabelas no banco de dados
-7. Execute `npm install` para instalar as dependências do frontend
-8. Execute `npm run dev` para compilar os assets do frontend
 
 ## Uso
 
