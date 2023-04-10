@@ -14,6 +14,9 @@ class Cart extends Model
         'product_id',
         'supplier_id',
         'quantity',
+        'price',
+        'image',
+        'name',
     ];
 
 

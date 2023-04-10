@@ -39,6 +39,7 @@ Route::get('/products/{supplierID}/{id}', [ProductController::class, 'show']);
 Route::get('/carts/{user_id}', [CartController::class, 'index']);
 Route::post('/carts/store', [CartController::class, 'store']);
 Route::put('/carts/decrement/{id}', [CartController::class, 'decrement']);
+Route::put('/carts/increment/{id}', [CartController::class, 'increment']);
 Route::delete('/carts/{id}', [CartController::class, 'destroy']);
 Route::delete('/carts/clear/{user_id}', [CartController::class, 'clear']);
 

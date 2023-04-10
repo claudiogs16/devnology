@@ -48,6 +48,8 @@ class CartController extends Controller
             'user_id' => 'required|integer|exists:users,id',
             'product_id' => 'required|integer',
             'supplier_id' => 'required|integer',
+            'price' => 'required|integer',
+            'image' => 'required|string',
 
 
         ], [
@@ -77,6 +79,9 @@ class CartController extends Controller
             $cart->user_id = $req->input('user_id');
             $cart->product_id = $req->input('product_id');
             $cart->supplier_id = $req->input('supplier_id');
+            $cart->price = $req->input('price');
+            $cart->image = $req->input('image');
+            $cart->name = $req->input('name');
             $cart->quantity = 1;
 
             $cart->save();
@@ -110,6 +115,39 @@ class CartController extends Controller
             }
 
             $cart->quantity =  $cart->quantity - 1;
+            $cart->save();
+
+            return $cart->refresh();
+
+        } catch (\Throwable $th) {
+            return $th;
+        }
+
+
+
+
+    }
+
+    public function increment($id){
+        $validator = Validator::make(['id' => $id], [
+            'id' => 'required|integer|exists:carts,id',
+        ], [
+            'exists' => 'O :attribute é invalido.',
+            'integer' => 'O campo :attribute deve ser um número inteiro.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+
+
+        try {
+            $cart = Cart::find($id);
+
+
+
+            $cart->quantity =  $cart->quantity + 1;
             $cart->save();
 
             return $cart->refresh();
