@@ -17,6 +17,7 @@ class Cart extends Model
         'price',
         'image',
         'name',
+        'description',
     ];
 
 

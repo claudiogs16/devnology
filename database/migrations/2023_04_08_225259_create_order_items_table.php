@@ -20,14 +20,14 @@ return new class extends Migration
 
             $table->string('name');
             $table->text('description');
-            $table->string('category')->default(null)->nullable();
-            $table->string('department')->default(null)->nullable();
-            $table->string('material')->default(null)->nullable();
+            // $table->string('category')->default(null)->nullable();
+            // $table->string('department')->default(null)->nullable();
+            // $table->string('material')->default(null)->nullable();
             $table->integer('price');
             $table->integer('quantity');
-            $table->integer('discountValue')->default(0);
-            $table->boolean('hasDiscount')->default(false);
-            $table->json('details')->default(null)->nullable();
+            // $table->integer('discountValue')->default(0);
+            // $table->boolean('hasDiscount')->default(false);
+            // $table->json('details')->default(null)->nullable();
             $table->string('image');
 
 

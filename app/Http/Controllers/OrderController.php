@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Cart;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
@@ -65,14 +66,8 @@ class OrderController extends Controller
             'orders.*.supplier_id' => 'required|integer',
             'orders.*.name' => 'required|string',
             'orders.*.description' => 'required|string',
-            'orders.*.category' => 'nullable|string',
-            'orders.*.department' => 'nullable|string',
-            'orders.*.material' => 'nullable|string',
             'orders.*.price' => 'required|integer',
-            'orders.*.discountValue' => 'required|numeric',
-            'orders.*.hasDiscount' => 'required|boolean',
             'orders.*.quantity' => 'required|integer|min:1',
-            'orders.*.details' => 'nullable',
             'orders.*.image' => 'required|string',
         ], [
             'orders.required' => 'O campo :attribute é obrigatório.',
@@ -94,8 +89,8 @@ class OrderController extends Controller
         }
 
 
-
-        $newOrder = new Order;
+        try {
+            $newOrder = new Order;
         $newOrder->user_id = $user_id;
 
 
@@ -105,7 +100,7 @@ class OrderController extends Controller
 
 
         for ($i = 0; $i < count($req->orders); $i++) {
-            $name = $req->orders[$i]['name'];
+            // $name = $req->orders[$i]['name'];
 
             $orderItem = new OrderItem;
             $orderItem->product_id = intval($req->orders[$i]['product_id']);
@@ -113,26 +108,12 @@ class OrderController extends Controller
             $orderItem->name = $req->orders[$i]['name'];
 
             $orderItem->price = $req->orders[$i]['price'];
-            $orderItem->discountValue = $req->orders[$i]['discountValue'];
-            $orderItem->hasDiscount = $req->orders[$i]['hasDiscount'];
+
             $orderItem->image = stripslashes($req->orders[$i]['image']);
             $orderItem->quantity = intval($req->orders[$i]['quantity']);
 
-            if (isset($req->orders[$i]['description']))
-                $orderItem->description = $req->orders[$i]['description'];
-            if (isset($req->orders[$i]['category']))
-                $orderItem->category = $req->orders[$i]['category'];
-            if (isset($req->orders[$i]['department']))
-                $orderItem->department = $req->orders[$i]['department'];
-            if (isset($req->orders[$i]['material']))
-                $orderItem->material = $req->orders[$i]['material'];
 
-
-            if (isset($req->orders[$i]['details']))
-                $orderItem->details = $req->orders[$i]['details'];
-
-
-
+            $orderItem->description = $req->orders[$i]['description'];
 
             $newOrder->orderItems()->save($orderItem);
         }
@@ -140,6 +121,23 @@ class OrderController extends Controller
 
         $newOrder->save();
 
+        $carts = Cart::where('user_id', $user_id)->delete();
+
+
+
         return $newOrder;
+
+        } catch (\Throwable $th) {
+            return $th;
+        }
+
+
+
+
+
+
+
+
+
     }
 }

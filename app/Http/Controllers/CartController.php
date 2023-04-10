@@ -50,6 +50,8 @@ class CartController extends Controller
             'supplier_id' => 'required|integer',
             'price' => 'required|integer',
             'image' => 'required|string',
+            'name' => 'required|string',
+            'description' => 'required|string',
 
 
         ], [
@@ -82,6 +84,7 @@ class CartController extends Controller
             $cart->price = $req->input('price');
             $cart->image = $req->input('image');
             $cart->name = $req->input('name');
+            $cart->description = $req->input('description');
             $cart->quantity = 1;
 
             $cart->save();
@@ -207,17 +210,17 @@ class CartController extends Controller
 
 
         try {
-            // $carts = Cart::where('user_id', $user_id)->delete();
+            $carts = Cart::where('user_id', $user_id)->delete();
 
-            // if($carts){
-            //     return json_encode($carts);
-            // }else{
-            //     return 'Os itens não foram encontrados';
-            // }
+            if($carts){
+                return json_encode($carts);
+            }else{
+                return 'Os itens não foram encontrados';
+            }
 
-            $user = User::where('id', $user_id)->first();
+            // $user = User::where('id', $user_id)->first();
 
-            return $user;
+            // return $user;
         } catch (\Throwable $th) {
             return $th;
         }
